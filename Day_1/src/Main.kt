@@ -1039,8 +1039,14 @@ class Main {
         return list.sum()
     }
 
+    private fun occurrencesOfIntegerInList(numbers: List<Int>, integer: Int): Int = numbers.count { it == integer }
 
+    fun iterateOccurrencesOfIntegerInList(numbers: List<Int>): List<Int> {
+        return numbers.map{ number -> numbers.count { it == number } * number }
+    }
 }
+
+
 fun main() {
     val mainInstance = Main()
     val list1 = mainInstance.getList1()
@@ -1050,4 +1056,9 @@ fun main() {
     val distanceList = mainInstance.findDistanceOfListPairs(result)
     println(distanceList)
     println(mainInstance.sumOfList(distanceList))
+    var list1Sum = mainInstance.iterateOccurrencesOfIntegerInList(list1)
+    var list2Sum = mainInstance.iterateOccurrencesOfIntegerInList(list2)
+    println(list1Sum)
+    println(list2Sum)
+    println((list1Sum + list2Sum).sum())
 }
