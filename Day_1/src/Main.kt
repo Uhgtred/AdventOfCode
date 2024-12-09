@@ -1005,6 +1005,15 @@ class Main {
         14454   69804
         19976   46609""".trimIndent()
 
+    private val testData = """
+        3   4
+        4   3
+        2   5
+        1   3
+        3   9
+        3   3
+    """.trimIndent()
+
     private val list1 = mutableListOf<Int>()
     private val list2 = mutableListOf<Int>()
 
@@ -1031,7 +1040,12 @@ class Main {
         return sortedList1.zip(sortedList2)
     }
 
+    fun zeroValuesOnlyPresentInOneList(list1: List<Int>, list2: List<Int>): List<Int> {
+        return list1.map { if (list2.contains(it)) it else 0 }
+    }
+
     fun findDistanceOfListPairs(list: List<Pair<Int, Int>>): List<Int> {
+        // this method shall only add the value to the list it it appears in both lists
         return list.map { abs(it.first - it.second) }
     }
 
@@ -1039,10 +1053,8 @@ class Main {
         return list.sum()
     }
 
-    private fun occurrencesOfIntegerInList(numbers: List<Int>, integer: Int): Int = numbers.count { it == integer }
-
-    fun iterateOccurrencesOfIntegerInList(numbers: List<Int>): List<Int> {
-        return numbers.map{ number -> numbers.count { it == number } * number }
+    fun iterateOccurrencesOfIntegerInList(numbers: List<Int>, list: List<Int>): List<Int> {
+        return numbers.map{ number -> (list.count { it == number }) * number }
     }
 }
 
@@ -1056,9 +1068,11 @@ fun main() {
     val distanceList = mainInstance.findDistanceOfListPairs(result)
     println(distanceList)
     println(mainInstance.sumOfList(distanceList))
-    var list1Sum = mainInstance.iterateOccurrencesOfIntegerInList(list1)
-    var list2Sum = mainInstance.iterateOccurrencesOfIntegerInList(list2)
+    val list1Sum = mainInstance.iterateOccurrencesOfIntegerInList(list1, list2)
+    val filteredList1 = mainInstance.zeroValuesOnlyPresentInOneList(list1, list2)
+    val filteredList2 = mainInstance.zeroValuesOnlyPresentInOneList(list2, list1)
+    println(filteredList1)
+    println(filteredList2)
     println(list1Sum)
-    println(list2Sum)
-    println((list1Sum + list2Sum).sum())
+    println(list1Sum.sum())
 }
