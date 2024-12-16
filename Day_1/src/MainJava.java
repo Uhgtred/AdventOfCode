@@ -1,4 +1,3 @@
-import kotlin.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1007,7 +1006,7 @@ public class MainJava {
         62591   16739
         53735   79935
         14454   69804
-        19976   46609""".trim();
+        19976   46609""";
 
     List<Integer> list1 = new ArrayList<>();
     List<Integer> list2 = new ArrayList<>();
@@ -1017,25 +1016,28 @@ public class MainJava {
     }
     void processLine(String line) {
                 List<Integer> parts = new ArrayList<>();
-                Integer.parseInt(Arrays.toString(line.trim().split("\\s+")));
+                parts = Arrays.stream(line.trim().split("\\s+"))
+                              .map(Integer::parseInt)
+                              .toList();
                 list1.add(parts.get(0));
                 list2.add(parts.get(1));
         }
-    };
 
-    List<Pair<Integer, Integer>>  creatSortedPairsList(List<Integer> list1, List<Integer> list2 ) {
+    List<List<Integer>>  creatSortedPairsList(List<Integer> list1, List<Integer> list2 ) {
         Collections.sort(list1);
         Collections.sort(list2);
         System.out.println(list1);
         System.out.println(list2);
-        List<Pair<Integer, Integer>> pairs = new ArrayList<>();
+        List<List<Integer>> pairs = new ArrayList<>();
         for (int i=0; i < list1.size(); i++){
-            pairs.add(new Pair<>(list1.get(i), list2.get(i)));
+            pairs.add(Arrays.asList(list1.get(i), list2.get(i)));
         }
         return pairs;
     }
 
-    public static void main(String[] args) {
-        List<Pair<Integer, Integer>> myList = new MainJava().creatSortedPairsList(new ArrayList<>(), new ArrayList<>());
+    public void main(String[] args) {
+        this.retrieveListsFromString();
+        List<List<Integer>> myList = this.creatSortedPairsList(this.list1, this.list2);
+        System.out.println(myList);
     }
 }
