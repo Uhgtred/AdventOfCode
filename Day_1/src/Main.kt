@@ -1035,21 +1035,24 @@ class Main {
     }
 
     fun createSortedPairsList(list1: List<Int>, list2: List<Int>): List<Pair<Int, Int>> {
+        // Method for sorting and merging 2 lists.
         val sortedList1 = list1.sorted()
         val sortedList2 = list2.sorted()
         return sortedList1.zip(sortedList2)
     }
 
     fun zeroValuesOnlyPresentInOneList(list1: List<Int>, list2: List<Int>): List<Int> {
+        // This method zeroes all values that are only present in one list.
         return list1.map { if (list2.contains(it)) it else 0 }
     }
 
     fun findDistanceOfListPairs(list: List<Pair<Int, Int>>): List<Int> {
-        // this method shall only add the value to the list it it appears in both lists
+        // This method calculates the distance of the columns for each row of the list.
         return list.map { abs(it.first - it.second) }
     }
 
     fun sumOfList(list: List<Int>): Int {
+        // Method for creating the sum of a list.
         return list.sum()
     }
 

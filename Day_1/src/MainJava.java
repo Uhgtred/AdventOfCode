@@ -1012,22 +1012,37 @@ public class MainJava {
     List<Integer> list2 = new ArrayList<>();
 
     void retrieveListsFromString() {
-        data.lines().forEach(this::processLine);
+        data.lines().forEach(line -> this.processLine(line, list1, list2));
+//        data.lines().forEach(this::processLine);
     }
-    void processLine(String line) {
-                List<Integer> parts = new ArrayList<>();
-                parts = Arrays.stream(line.trim().split("\\s+"))
-                              .map(Integer::parseInt)
-                              .toList();
-                list1.add(parts.get(0));
-                list2.add(parts.get(1));
-        }
 
-    List<List<Integer>>  creatSortedPairsList(List<Integer> list1, List<Integer> list2 ) {
+    void processLine(String line, List<Integer> list1, List<Integer> list2) {
+        /*
+        * Method for retrieving two lists from the original data, which is basically a giant string with two columns, separated by multiple white-spaces.
+        * @ param line: One row of the original data-string. It contains 2 columns which shall both be appended to the lists.
+        * @ param list1: List that the first column of data is going to be appended to.
+        * @ param list2: List that the second column of data is going to be appended to.
+        * */
+        List<Integer> parts = new ArrayList<>();
+        parts = Arrays.stream(line.trim().split("\\s+"))
+                      .map(Integer::parseInt)
+                      .toList();
+        list1.add(parts.get(0));
+        list2.add(parts.get(1));
+    }
+
+    List<List<Integer>> creatSortedPairsList(List<Integer> list1, List<Integer> list2 ) {
+        /*
+        Method for making one list containing two sorted lists from the original 2 lists that are being passed to this method.
+        *@param list1: first of the two lists that will be sorted.
+        *@param list2: second of the two lists that will be sorted.
+        * @returns: Returns a list containing two sorted lists.
+         */
         Collections.sort(list1);
         Collections.sort(list2);
-        System.out.println(list1);
-        System.out.println(list2);
+        // Printing for visualization.
+//        System.out.println(list1);
+//        System.out.println(list2);
         List<List<Integer>> pairs = new ArrayList<>();
         for (int i=0; i < list1.size(); i++){
             pairs.add(Arrays.asList(list1.get(i), list2.get(i)));
