@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class MainJava {
+public class MyMainJava {
 
     private String data = """
         77221   93653
@@ -1027,6 +1027,7 @@ public class MainJava {
         parts = Arrays.stream(line.trim().split("\\s+"))
                       .map(Integer::parseInt)
                       .toList();
+        System.out.println(parts);
         list1.add(parts.get(0));
         list2.add(parts.get(1));
     }
@@ -1050,9 +1051,14 @@ public class MainJava {
         return pairs;
     }
 
-    public void main(String[] args) {
+    public void main() {
         this.retrieveListsFromString();
         List<List<Integer>> myList = this.creatSortedPairsList(this.list1, this.list2);
         System.out.println(myList);
     }
+}
+
+void main(){
+    MyMainJava instance = new MyMainJava();
+    instance.main();
 }
